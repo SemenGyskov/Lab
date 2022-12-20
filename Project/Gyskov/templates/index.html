@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <title></title>
+</head>
+<body>
+    <form method="POST" action="create/">
+        {% csrf_token %}
+        <p>
+            <label>Введите название Фильма</label><br>
+            <input type="text" name="name" />
+        </p>
+        <p>
+            <label>Введите дату выхода Фильма</label><br>
+            <input type="date" name="date_out" />
+        </p>
+        <p>
+            <label>Введите дату выхода Фильма</label><br>
+            <input type="date" name="date_view" />
+        </p>
+        <p>
+            <label>Введите Актеров из Фильма</label><br>
+            <input type="textarea" name="actors" />
+        </p>
+        <p>
+            <label>Введите ;fyh Фильма</label><br>
+            <input type="textarea" name="category" />
+        </p>
+        <input type="submit" value="Сохранить">
+    </form>
+    {% if films.count > 0 %}
+    <h2>Список фильмов</h2>
+    <table>
+        <thead><th>id<b>|</b></th><th>name<b>|</b></th><th>release date<b>|</b></th><th>show date<b>|</b></th><th>actors<b>|</b><th>genre<b>|</b></th></thead>
+        {% for film in films %}
+        <tr>
+            <td>{{ film.id  }}<b> |</b></td>
+            <td>{{ film.name }}<b> |</b></td>
+            <td>{{ film.date_out  }}<b> |</b></td>
+            <td>{{ film.date_view  }}<b> |</b></td>
+            <td>{{ film.actors  }}<b> |</b></td>
+            <td>{{ category  }}<b> |</b></td>
+            <td><a href="edit/{{film.id}}">Изменить</a> | <a href="delete/{{film.id}}">Удалить</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>
